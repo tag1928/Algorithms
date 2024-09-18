@@ -20,11 +20,45 @@ void merge(vector <int> &left_array, vector <int> &right_array, vector <int> &ar
 	int left_cursor = 0;
 	int right_cursor = 0;
 	int cursor = 0;
+	
+	while (left_cursor < left_array.size() and right_cursor < right_array.size())
+	{
+		if (left_array[left_cursor] < right_array[right_cursor])
+		{
+			array[cursor] = left_array[left_cursor];
+			
+			cursor += 1;
+			left_cursor += 1;
+		}
+		
+		else
+		{
+			array[cursor] = right_array[right_cursor];
+			
+			cursor += 1;
+			right_cursor += 1;
+		}
+	}
+	
+	while (left_cursor < left_array.size())
+	{
+		array[cursor] = left_array[left_cursor];
+		
+		cursor += 1;
+		left_cursor += 1;
+	}
+	
+	while (right_cursor < right_array.size())
+	{
+		array[cursor] = right_array[right_cursor];
+		
+		cursor += 1;
+		right_cursor += 1;
+	}
 }
 
 void mergeSort(vector <int> &array)
 {
-	printArray(array);
 	if (array.size() <= 1) return;
 	
 	int left_array_size = array.size() / 2;
@@ -49,16 +83,18 @@ void mergeSort(vector <int> &array)
 }
 
 int main()
-{
-	int arraySize = 5;
+{	
+	cout << "Enter the size of the array: " << endl;
+	int arraySize;
+	cin >> arraySize;
+	
+	cout << "Enter the elements of array: " << endl;
+	int arr[arraySize];
 	vector <int> array(arraySize);
-	
-	//  {10, 7, 2, 3, 9, 8, 1, 5, 0, 4};
-	
-	int arr[] = {5, 4, 3, 2, 1};
 	
 	for (int i = 0; i < arraySize; i++)
 	{
+		cin >> arr[i];
 		array[i] = arr[i];
 	}
 	
