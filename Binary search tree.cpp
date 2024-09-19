@@ -42,29 +42,15 @@ class Student
 
 struct Node
 {
-	Node *right_node = NULL;
 	Node *left_node = NULL;
+	Node *right_node = NULL;
 	
 	Student *student = NULL;
 };
 
 void add_nodes_by_age(Node *root, Student &student)
 {
-	if (student.age > root -> student -> age)
-	{
-		if (root -> right_node == NULL)
-		{
-			root -> right_node = new Node;
-			root -> right_node -> student = &student;
-		}
-
-		else
-		{
-			return add_nodes_by_age(root -> right_node, student);
-		}
-	}
-	
-	else
+	if (student.age < root -> student -> age)
 	{
 		if (root -> left_node == NULL)
 		{
@@ -75,6 +61,20 @@ void add_nodes_by_age(Node *root, Student &student)
 		else
 		{
 			return add_nodes_by_age(root -> left_node, student);
+		}
+	}
+	
+	else
+	{
+		if (root -> right_node == NULL)
+		{
+			root -> right_node = new Node;
+			root -> right_node -> student = &student;
+		}
+
+		else
+		{
+			return add_nodes_by_age(root -> right_node, student);
 		}
 	}
 	
@@ -99,20 +99,32 @@ void search_by_age(Node *root, int age)
 		return;
 	}
 	
-	if (root -> right_node == NULL and root -> left_node == NULL)
+	bool left_is_null = false;
+	bool right_is_null = false;
+	
+	if (root -> left_node == NULL) left_is_null = true;
+	if (root -> right_node == NULL) right_is_null = true;
+	
+	if (left_is_null and right_is_null)
 	{
 		cout << "No student exists with the given age." << endl;
 		return;
 	}
 	
-	if (age > root -> student -> age)
-	{
-		return search_by_age(root -> right_node, age);
-	}
-	
 	if (age < root -> student -> age)
 	{
-		return search_by_age(root -> left_node, age);
+		if (left_is_null == false)
+		{
+			return search_by_age(root -> left_node, age);
+		}
+	}
+	
+	else
+	{
+		if (right_is_null == false)
+		{
+			return search_by_age(root -> right_node, age);
+		}
 	}
 }
 
@@ -123,21 +135,21 @@ int main()
 	Node root;
 	root.student = new Student(0, 0, 0, 'n', " ", " ");
 	
-	Student a(0, 5, 8, 'M', "Jerome", "Bludmonette");
-	Student b(1, 9, 14, 'M', "Zigga", "Mabigga");
-	Student c(2, 10, 16, 'M', "Jigsaw", "Tripper");
-	Student d(3, 1, 6, 'F', "Lily", "Bro");
+	Student a(0, 5, 8, 'm', "Jerome", "Bludmonette");
+	Student b(1, 9, 14, 'm', "Zigga", "Mabigga");
+	Student c(2, 10, 16, 'm', "Jigsaw", "Tripper");
+	Student d(3, 1, 6, 'f', "Lily", "Bro");
 	
 	vector <Student> array;
 	
-	array.push_back(d);
-	array.push_back(c);
-	array.push_back(b);
 	array.push_back(a);
+	array.push_back(b);
+	array.push_back(c);
+	array.push_back(d);
 	
 	add_nodes_by_age(&root, array);
 	
-	search_by_age(&root, 7);
+	search_by_age(&root, 6);
 	
 	return 0;
 }
