@@ -81,16 +81,6 @@ void add_nodes_by_age(Node *root, Student &student)
 	return;
 }
 
-void add_nodes_by_age(Node *root, vector <Student> &array)
-{
-	for (int i = 0; i < array.size(); i++)
-	{
-		add_nodes_by_age(root, array[i]);
-	}
-	
-	return;
-}
-
 void search_by_age(Node *root, int age)
 {
 	if (root -> student -> age == age)
