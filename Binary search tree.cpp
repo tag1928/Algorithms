@@ -140,14 +140,10 @@ int main()
 	Student c(2, 10, 16, 'm', "Jigsaw", "Tripper");
 	Student d(3, 1, 6, 'f', "Lily", "Bro");
 	
-	vector <Student> array;
-	
-	array.push_back(a);
-	array.push_back(b);
-	array.push_back(c);
-	array.push_back(d);
-	
-	add_nodes_by_age(&root, array);
+	add_nodes_by_age(&root, a);
+	add_nodes_by_age(&root, b);
+	add_nodes_by_age(&root, c);
+	add_nodes_by_age(&root, d);
 	
 	search_by_age(&root, 6);
 	
