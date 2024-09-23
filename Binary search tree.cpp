@@ -45,7 +45,7 @@ struct Node
 	Node *left_node = NULL;
 	Node *right_node = NULL;
 	
-	Student *student = NULL;
+	Student* student = NULL;
 };
 
 void add_nodes_by_age(Node *root, Student &student)
